@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatbotapi-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: chatbotapi
+  template:
+    metadata:
+      labels:
+        app: chatbotapi
+    spec:
+      containers:
+      - name: chatbotapi
+        image: gabrielag00/chatbotapi:latest
+        ports:
+        - containerPort: 8000
