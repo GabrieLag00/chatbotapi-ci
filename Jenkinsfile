@@ -9,6 +9,20 @@ pipeline {
             }
         }
 
+        stage('Prepare Env File') {
+            steps {
+                echo 'Generando archivo .env...'
+                sh '''
+                echo "GOOGLE_API_KEY=AIzaSyC_7HOBysberCCqWa1BSn7gvMP1hJmwzpo" > .env
+                echo "EMBEDDING_MODEL=models/gemini-embedding-001" >> .env
+                echo "GEN_MODEL=gemini-2.5-flash" >> .env
+                echo "PERSIST_DIR=./data/chroma_juego_v2" >> .env
+                echo "PDF_PATH=./data/juego.pdf" >> .env
+                echo "K_RETRIEVAL=5" >> .env
+                '''
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 echo 'Construyendo imagen Docker...'
